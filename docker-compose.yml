@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  drupal:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      - DRUPAL_DB_HOST=db
+      - DRUPAL_DB_NAME=drupal
+      - DRUPAL_DB_USER=drupaluser
+      - DRUPAL_DB_PASSWORD=drupalpassword
+    depends_on:
+      - db
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: drupal
+      MYSQL_USER: drupaluser
+      MYSQL_PASSWORD: drupalpassword
+    ports:
+      - "3306:3306"
